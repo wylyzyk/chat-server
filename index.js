@@ -2,6 +2,7 @@ const express = require("express");
 const debug = require("debug");
 
 const email = require("./src/router/email");
+const user = require("./src/router/user");
 
 const app = express();
 const port = 5000;
@@ -20,7 +21,10 @@ app.all("*", (req, res, next) => {
   }
 });
 
+app.use(express.json());
+
 app.use("/api/email", email);
+app.use("/api/user", user);
 
 
 app.listen(port, function(){

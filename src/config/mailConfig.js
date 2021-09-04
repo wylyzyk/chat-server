@@ -28,7 +28,7 @@ const emailSignUp = (email, callback) => {
 
   transporter.sendMail(options, (err, info) => {
     if(err) {
-      console.log(new Error(err));
+      console.log(new Error(String(err)));
       return;
     }
     callback(info);

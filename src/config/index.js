@@ -6,7 +6,6 @@
  * @FilePath  : \server\config\index.ts
  * @Description:
  */
-
 const { MONGODB_ONECHAT } = require("./constant");
 const emailSignUp = require("./mailConfig");
 

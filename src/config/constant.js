@@ -1,5 +1,5 @@
 // 数据库连接地址
-MONGODB_ONECHAT = "mongodb+srv://admin:qaq5421@chatcluster.2bau7.mongodb.net/chat?retryWrites=true&w=majority"
+const MONGODB_ONECHAT = "mongodb+srv://admin:qaq5421@chatcluster.2bau7.mongodb.net/chat?retryWrites=true&w=majority"
 
 // 邮箱证书
 const credentials = {
