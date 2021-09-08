@@ -6,11 +6,11 @@
  * @FilePath  : \server\config\index.ts
  * @Description:
  */
-const { MONGODB_ONECHAT } = require("./constant");
+const { MONGODB_ONECHAT, jwtSecret } = require("./constant");
 const emailSignUp = require("./mailConfig");
-
 
 module.exports = {
   MONGODB_ONECHAT,
+  jwtSecret,
   emailSignUp
 }

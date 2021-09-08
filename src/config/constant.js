@@ -7,9 +7,13 @@ const credentials = {
     user: "2256057228@qq.com",
     pass: "radrdvvihsbhebba"
   }
-}
+};
+
+// jwt
+const jwtSecret = "somesecretkeyofonechat";
 
 module.exports = {
   MONGODB_ONECHAT,
-  credentials
+  credentials,
+  jwtSecret
 }

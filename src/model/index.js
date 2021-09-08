@@ -3,14 +3,14 @@ const client = require("../mongoose");
 
 // 用户表
 const UserSchema = new mongoose.Schema({
-  name: { type: String }, // 用户名
+  username: { type: String }, // 用户名
   password: { type: String }, // 密码
   email: { type: String }, // 邮箱
   sex: { type: String, default: "asexual" }, // 性别
   birth: { type: Date }, // 生日
   phone: { type: Number }, // 电话
   explain: { type: String }, // 个人介绍
-  imgurl: { type: String, default: "user.png" }, // 用户头像
+  imgUrl: { type: String, default: "user.png" }, // 用户头像
   time: { type: Date } // 注册时间
 });
 
@@ -35,7 +35,7 @@ const MessageSchema = new mongoose.Schema({
 // 群表
 const GroupSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  name: { type: String },
+  username: { type: String },
   imgUrl: { type: String, default: "group.png" },
   time: { type: Date },
   notice: { type: String }
@@ -45,7 +45,7 @@ const GroupSchema = new mongoose.Schema({
 const GroupUserSchema = new mongoose.Schema({
   groupId: { type: mongoose.Schema.Types.ObjectId, ref: "Group" },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  name: { type: String },
+  username: { type: String },
   tip: { type: Number, default: 0 },
   time: { type: Date },
   shield: { type: Number }

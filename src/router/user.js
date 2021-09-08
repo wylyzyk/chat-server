@@ -1,27 +1,27 @@
 const express = require("express");
-const { newUser, matchUser } = require("../utils");
+const { newUser, matchAccout } = require("../utils");
 
 const router = express.Router();
 
 router.post("/match", (req, res) => {
-  const { data, type } = req.body;
+  const { payload, type } = req.body;
 
-  matchUser(data, type, (result) => {
+  matchAccout(payload, type, (result) => {
     console.log(result);
-    res.status(200).send({ status: 200, result });
+    res.status(200).send({ status: 200, data: result });
   });
 });
 
 router.post("/", (req, res) => {
-  const { name, mail, password } = req.body;
+  const { username, email, password } = req.body;
 
   newUser({
-    username: name,
-    email: mail,
+    username,
+    email,
     password,
     callback: (result) => {
       console.log(result);
-      res.status(200).send({ msg: "success", result });
+      res.status(200).send({ msg: "success", data: result });
     }
   });
 });
