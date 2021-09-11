@@ -1,10 +1,10 @@
 const bcrypt = require("bcryptjs");
 
 // 加密
-async function encryption (pwd) {
+ function encryption (pwd) {
   try{
-    const salt = await bcrypt.genSaltSync(10);
-    const hash = await bcrypt.hashSync(pwd, salt);
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(pwd, salt);
 
     return hash;
   }catch(e) {

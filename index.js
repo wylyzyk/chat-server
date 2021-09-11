@@ -4,6 +4,10 @@ const debug = require("debug");
 const email = require("./src/router/email");
 const user = require("./src/router/user");
 const auth = require("./src/router/auth");
+const search = require("./src/router/search");
+const detail = require("./src/router/user-detail");
+
+const { verifyToken } = require("./src/dao/jwt");
 
 const app = express();
 const port = 5000;
@@ -24,10 +28,28 @@ app.all("*", (req, res, next) => {
 
 app.use(express.json());
 
+// token 验证
+app.use((req, res, next) => {
+  if(typeof(req.body.token) !== "undefined") {
+    const token = req.body.token;
+    const tokenCode = verifyToken(token);
+    // 验证通过
+    if(tokenCode === 1) {
+      next();
+      return false;
+    }
+    // 验证失败
+    res.status(300).send({code: 300});
+  }
+  next();
+})
+
+
 app.use("/api/email", email);
 app.use("/api/user", user);
 app.use("/api/auth", auth);
-
+app.use("/api/search", search);
+app.use("/api/info", detail);
 
 app.listen(port, function(){
   console.log("server runing...");

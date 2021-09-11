@@ -1,6 +1,6 @@
 const express = require("express");
 const { verification } = require("../dao/bcrypt");
-const { matchUser } = require("../utils");
+const { matchUser } = require("../service");
 const jwt = require("../dao/jwt");
 
 const router = express.Router();

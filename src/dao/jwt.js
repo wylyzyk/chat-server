@@ -9,15 +9,22 @@ function token(id) {
   };
   return jwt.sign(payload, jwtSecret, {
     expiresIn: 60 * 60 * 24 * 120
-  })
+  });
 }
 
 // 解码token
 function verifyToken(token) {
-  return jwt.verify(token, jwtSecret);
+  let tokenCode = 0;
+  jwt.verify(token, jwtSecret, (err, decode) => {
+    if (err) {
+      tokenCode = 0;
+    }
+    tokenCode = 1;
+  });
+  return tokenCode;
 }
 
 module.exports = {
   token,
   verifyToken
-}
+};
