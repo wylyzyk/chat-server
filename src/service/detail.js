@@ -29,7 +29,7 @@ function userDetail(id, callback) {
 function userUpdate(payload, callback, updateCallback) {
   if (typeof payload.password !== "undefined") {
     // 密码不为空进行校验
-    User.find({ "_id": payload.id }, { "password": 1 }, null, (err, result) => {
+    User.find({ _id: payload.id }, { password: 1 }, null, (err, result) => {
       if (err) {
         console.log(new Error(String(err)));
       } else {
@@ -60,13 +60,13 @@ function userUpdate(payload, callback, updateCallback) {
 
 /**
  *
- * @param {Object} payload type data id
+ * @param {Object} payload type newdata id
  * @param {Function} callback doc result
  */
 function updateInfo(payload, callback) {
+  console.log(payload);
   const updateStr = {};
-
-  updateStr[payload.type] = payload.password || payload.data;
+  updateStr[payload.type] = payload.password || payload.newdata;
   User.findByIdAndUpdate(payload.id, updateStr, null, (err, doc, result) => {
     if (err) {
       console.log("---", new Error(String(err)));
@@ -93,9 +93,27 @@ function friendMarkName(payload, callback) {
   });
 }
 
+/**
+ * 获取好友昵称
+ * @param {Object} payload userId, friendId
+ * @param {Function} callback
+ */
+function getFriendMarkName(payload, callback) {
+  const searchStr = { userId: payload.userId, friendId: payload.friendId };
+  const select = { markname: 1 };
+  Friend.findOne(searchStr, select, null, (err, result) => {
+    if (err) {
+      console.log(new Error(String(err)));
+    } else {
+      callback && callback(result);
+    }
+  });
+}
+
 module.exports = {
   userDetail,
   userUpdate,
   friendMarkName,
-  updateInfo
+  updateInfo,
+  getFriendMarkName
 };
