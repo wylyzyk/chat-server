@@ -34,13 +34,13 @@ router.post("/alterInfo", (req, res) => {
         });
       });
     },
-    // 更新邮箱
+    // 更新邮箱/用户名
     () => {
       if (payload.type !== "password") {
         // 邮箱匹配
-        matchAccout(payload.newdata, "email", (result) => {
+        matchAccout(payload.newdata, payload.type, (result) => {
           if (result > 0) {
-            res.status(500).send({ code: 500, msg: `email repeat${result}!` });
+            res.status(500).send({ code: 500, msg: `${payload.type} repeat${result}!` });
             return;
           }
           updateInfo(payload, (doc, result) => {

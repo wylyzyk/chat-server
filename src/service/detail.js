@@ -54,6 +54,7 @@ function userUpdate(payload, callback, updateCallback) {
       }
     });
   } else {
+    // 用户名/邮箱的修改
     updateCallback();
   }
 }

@@ -34,29 +34,29 @@ const MessageSchema = new mongoose.Schema({
 
 // 群表
 const GroupSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  username: { type: String },
-  imgUrl: { type: String, default: "group.png" },
-  time: { type: Date },
-  notice: { type: String }
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // 用户id
+  username: { type: String }, // 群名称
+  imgUrl: { type: String, default: "group.png" }, // 群头像
+  time: { type: Date }, // 创建时间
+  notice: { type: String } // 公告
 });
 
 // 群成员表
 const GroupUserSchema = new mongoose.Schema({
-  groupId: { type: mongoose.Schema.Types.ObjectId, ref: "Group" },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  username: { type: String },
-  tip: { type: Number, default: 0 },
-  time: { type: Date },
-  shield: { type: Number }
+  groupId: { type: mongoose.Schema.Types.ObjectId, ref: "Group" }, // 群id
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // 用户id
+  username: { type: String }, // 群内名称
+  tip: { type: Number, default: 0 }, // 未读消息数
+  time: { type: Date }, // 加入时间
+  shield: { type: Number } // 屏蔽群消息（0：不屏蔽、1：屏蔽）
 });
 
 // 群消息表
 const GroupMsgSchema = new mongoose.Schema({
-  groupId: { type: mongoose.Schema.Types.ObjectId, ref: "Group" },
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  message: { type: String },
-  types: { type: String },
+  groupId: { type: mongoose.Schema.Types.ObjectId, ref: "Group" }, // 群id
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // 用户id
+  message: { type: String }, // 内容
+  types: { type: String }, // 内容内型（0：文字、1：图片链接、2：音频链接）
   time: { type: Date } // 消息发送时间
 });
 
@@ -66,7 +66,6 @@ const Message = client.model("Message", MessageSchema);
 const Group = client.model("Group", GroupSchema);
 const GroupUser = client.model("GroupUser", GroupUserSchema);
 const GroupMsg = client.model("GroupMsg", GroupMsgSchema);
-
 
 module.exports = {
   User,
