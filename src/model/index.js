@@ -35,7 +35,7 @@ const MessageSchema = new mongoose.Schema({
 // 群表
 const GroupSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // 用户id
-  username: { type: String }, // 群名称
+  groupname: { type: String }, // 群名称
   imgUrl: { type: String, default: "group.png" }, // 群头像
   time: { type: Date }, // 创建时间
   notice: { type: String } // 公告

@@ -7,6 +7,8 @@ const auth = require("./src/router/auth");
 const search = require("./src/router/search");
 const detail = require("./src/router/user-detail");
 const friend = require("./src/router/friend");
+const file = require("./src/router/file");
+const home = require("./src/router/home");
 
 const { verifyToken } = require("./src/dao/jwt");
 
@@ -27,7 +29,15 @@ app.all("*", (req, res, next) => {
   }
 });
 
-app.use(express.json());
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
+app.use(express.json({ limit: "50mb" }));
+
+// 获取静态路径
+/**
+ * 获取静态路径
+ * 前端通过访问upload目录下的资源，显示图片
+ */
+app.use(express.static(__dirname + "/upload"));
 
 // token 验证
 app.use((req, res, next) => {
@@ -51,6 +61,8 @@ app.use("/api/auth", auth);
 app.use("/api/search", search);
 app.use("/api/info", detail);
 app.use("/api/friend", friend);
+app.use("/api/upload", file);
+app.use("/api/home", home);
 
 app.listen(port, function () {
   console.log("server runing...");
