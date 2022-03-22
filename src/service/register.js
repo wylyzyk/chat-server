@@ -1,6 +1,7 @@
 const { encryption } = require("../dao/bcrypt");
 const { User } = require("../model");
 
+// 用户注册
 function newUser({ username, password, email, callback }) {
   // 密码加密
   const pwd = encryption(password);
@@ -12,7 +13,10 @@ function newUser({ username, password, email, callback }) {
     time: new Date()
   };
 
+  console.log(data)
+
   const user = new User(data);
+
   user.save((err, product) => {
     if (err) {
       console.log(new Error(err));
@@ -29,7 +33,7 @@ function matchAccout(data, type, callback) {
 
   User.countDocuments(searchStr, (err, result) => {
     if (err) {
-      console.log(new Error(String(err)));
+      console.log(new Error(err));
     } else {
       callback && callback(result);
     }
@@ -39,4 +43,4 @@ function matchAccout(data, type, callback) {
 module.exports = {
   matchAccout,
   newUser
-}
+};

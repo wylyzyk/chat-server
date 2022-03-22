@@ -22,10 +22,12 @@ const upload = multer({ storage: storage });
 
 router.post("/", upload.array("file", 10), (req, res, next) => {
   // 获取文件信息
-  const data = req.files;
+  const data = req.files[0].filename;
+  const url = req.body.url;
+  const imgUrl = `/${url}/${data}`;
   console.log(data);
   // 返回给前端 send(data)
-  res.send(data);
+  res.send(imgUrl);
 });
 
 module.exports = router;

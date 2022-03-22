@@ -124,7 +124,7 @@ function updateFriendState(data, callback) {
 /**
  * 拒绝 / 删除好友
  * @param {Object} data userId, friendId
- * @param {Function} callback 
+ * @param {Function} callback
  */
 function rejectFriends(data, callback) {
   const updateStr = {

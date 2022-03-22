@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema({
   birth: { type: Date }, // 生日
   phone: { type: Number }, // 电话
   explain: { type: String }, // 个人介绍
-  imgUrl: { type: String, default: "user.png" }, // 用户头像
+  imgUrl: { type: String, default: "/user/user.png" }, // 用户头像
   time: { type: Date } // 注册时间
 });
 
@@ -19,7 +19,9 @@ const FriendSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // 用户id
   friendId: { type: mongoose.Schema.Types.ObjectId, ref: "User" }, // 好友ID
   state: { type: Number }, // 0: 已是好友, 1: 正在申请 2: 申请已发送
-  time: { type: Date } // 注册时间
+  time: { type: Date }, // 注册时间
+  markname: { type: String },   // 好友昵称
+  lastTime: { type: Date }  // 最后通讯时间
 });
 
 // 一对一消息表

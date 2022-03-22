@@ -1,4 +1,3 @@
-const { query } = require("express");
 const { Friend, Message, GroupUser, GroupMsg } = require("../model");
 
 /**
@@ -14,7 +13,6 @@ function getUser(userId, state, callback) {
   // 查找friendId关联德user对象
   query.populate("friendId");
   // 排序方式， 按照最后通讯时间
-  // TODO: 数据库未添加lastTime暂不使用
   query.sort({ lastTime: -1 });
   // 查询结果
   query
@@ -111,18 +109,24 @@ function getGroup(userId, callback) {
   query.where({ userId: userId });
   query.populate("groupId");
   query.sort({ lastTime: -1 });
-  query.exec().then((values) => {
-    const result = values.map((value) => {
-      return {
-        groupId: value.groupId._id,
-        groupname: value.groupId.groupname,
-        markname: value.name,
-        imgUrl: value.groupId.imgUrl,
-        lasTime: value.lastTime,
-        tip: value.tip
-      };
+  query
+    .exec()
+    .then((values) => {
+      const result = values.map((value) => {
+        return {
+          groupId: value.groupId._id,
+          groupname: value.groupId.groupname,
+          markname: value.name,
+          imgUrl: value.groupId.imgUrl,
+          lasTime: value.lastTime,
+          tip: value.tip
+        };
+      });
+      callback && callback(result);
+    })
+    .catch((err) => {
+      console.log(new Error(err));
     });
-  });
 }
 
 /**
